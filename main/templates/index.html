@@ -1,0 +1,381 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <script>
+        var views = {
+            'parent': 0,
+            'login': 0,
+            'register': 0,
+            'contact': 0,
+        };
+        var active_page = 0;
+        $(document).ready(function () {
+
+            views['parent'] = $('#parent');
+            views['login'] = $('#login').clone();
+            views['register'] = $('#register').clone();
+            views['contact'] = $('#contact').clone();
+            views['profile'] = $('#profile').clone();
+            views['story'] = $('#story').clone();
+
+            active_page = null;
+
+            $('#login').remove();
+            $('#register').remove();
+            $('#contact').remove();
+            $('#profile').remove();
+            $('#story').remove();
+
+            var app = angular.module("myApp", []);
+
+            app.controller("loginCtrl", function ($scope) {
+                $scope.login_http = function () {
+                    window.alert('data');
+                };
+            });
+
+        });
+    </script>
+
+
+    <script src="{% static 'scripts/main.js' %}"></script>
+    <script src="{% static 'scripts/ajax_requests.js' %}"></script>
+
+</head>
+<body class="w3-text-white">
+
+<div class="w3-container main-div">
+
+    <div class="w3-container w3-right menu-up">
+        <input class="w3-btn w3-ripple" type="button" value="Login" onclick="change_page_animation('login')">
+        <span class="spacer-horizontal"></span>
+        <input class="w3-btn w3-ripple" type="button" value="Register" onclick="change_page_animation('register')">
+        <span class="spacer-horizontal"></span>
+        <input class="w3-btn w3-ripple" type="button" value="Contact" onclick="change_page_animation('contact')" id="btn-contact">
+        <span class="spacer-horizontal"></span>
+        <input class="w3-btn w3-ripple" type="button" value="Profile" onclick="change_page_animation('profile')" id="btn-profile">
+        <span class="spacer-horizontal"></span>
+        <input class="w3-btn w3-ripple" type="button" value="Story" onclick="change_page_animation('story')" id="btn-story">
+    </div>
+
+    <div class="w3-container">
+
+        <div class="w3-display-middle" id="parent">
+
+            <!--   Login Card   -->
+            <div class="w3-card-4 w3-animate-opacity w3-padding-large login-div card-background" id="login"
+             >
+
+                <p>
+                <h3 class="w3-center"><b>Login</b></h3>
+                </p>
+                <br><br>
+                <form>
+                    <label>Username</label>
+                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="text">
+                    <br>
+                    <label>Password</label>
+                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="password">
+                    <br>
+                    <p class="w3-center">
+                        <button class="w3-btn w3-ripple" id="btn-login-send">
+                            Send
+                        </button>
+                        <button class="w3-btn w3-ripple" type="button"
+                                onclick="change_page_animation('register')">
+                            Register
+                        </button>
+                    </p>
+                </form>
+
+            </div>
+
+            <!--   Register Card   -->
+            <div class="w3-card-4 w3-animate-opacity w3-padding-large register-div card-background" id="register">
+                <p>
+                <h3 class="w3-center"><b>Register</b></h3>
+                </p>
+                <br><br>
+                <form action="#">
+                    <label>Username</label>
+                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="text">
+                    <br>
+                    <label>Email</label>
+                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="email">
+                    <br>
+                    <label>Password</label>
+                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="password">
+                    <br>
+                    <p class="w3-center">
+                        <button class="w3-btn w3-ripple"id="btn-register-send">Send</button>
+                        <button class="w3-btn w3-ripple"
+                                onclick=change_page_animation('login')>Login</button>
+                    </p>
+                </form>
+            </div>
+
+            <!--   Contact Card   -->
+            <div class="w3-card-4 w3-animate-opacity w3-padding-large contact-div card-background" id="contact">
+                <div class="w3-center w3-left w3-cell w3-cell-middle contact-div-left-side">
+                    <p>
+                    <h3 class="w3-center"><b>Contact</b></h3>
+                    <p class="w3-opacity">
+                        Machine learning is the scientific study of algorithms and statistical models that computer
+                        systems use to perform a specific task without using explicit instructions, relying on patterns
+                        and inference instead. It is seen as a subset of artificial intelligence.
+                    </p>
+                    </p>
+                    <br>
+                    <p>
+                    <h4>Address</h4>
+                    <p class="w3-opacity">
+                        Mindelsohn Way, Birmingham B15 2TH, United Kingdom
+                    </p>
+                    </p>
+
+                    <p>
+                    <h4>Phone</h4>
+                    <p class="w3-opacity">
+                        +98 938 341 19 67
+                    </p>
+                    </p>
+
+                    <p>
+                    <h4>E-mail</h4>
+                    <p class="w3-opacity">
+                        Mohammad.h4s4ni@gmail.com
+                    </p>
+                    </p>
+                </div>
+                <div class="w3-card-4 w3-right w3-cell w3-cell-middle w3-padding-large contact-div-right-side card-background">
+                    <p>
+                    <h3 class="w3-center"><b>Contact Form</b></h3>
+                    </p>
+                    <br><br>
+                    <form action="#" class="w3-opacity">
+                        <label>Your Name</label>
+                        <input class="w3-input w3-opacity w3-text-white input-transparent" type="text">
+                        <br>
+                        <label>Your Email</label>
+                        <input class="w3-input w3-opacity w3-text-white input-transparent" type="text">
+                        <br>
+                        <label>Your Phone</label>
+                        <input class="w3-input w3-opacity w3-text-white input-transparent" type="text">
+                        <br>
+                        <label>Message</label>
+                        <textarea rows="3" cols="20" class="w3-input w3-opacity w3-text-white input-transparent"
+                                  type="text"></textarea>
+
+                        <br>
+                        <p class="w3-center">
+                            <button class="w3-btn w3-ripple" id="btn-contact-send">Send</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+
+            <!--   Profile Card   -->
+            <div class="w3-card-4 w3-animate-opacity profile-div card-background" id="profile">
+                <div class="w3-center w3-left w3-cell w3-cell-middle profile-div-left-side">
+                    <p class="vertical-menu">
+                        <input type="button" class="w3-btn w3-ripple" value="Profile"
+                               onclick="location.href='#profile-div-right-side-profile'">
+                    </p>
+                    <p class="vertical-menu">
+                        <input type="button" class="w3-btn w3-ripple" value="Change Info"
+                               onclick="location.href='#profile-div-right-side-change_info'">
+                    </p>
+                    <p class="vertical-menu">
+                        <input type="button" class="w3-btn w3-ripple" value="Password"
+                               onclick="location.href='#profile-div-right-side-password'">
+                    </p>
+                    <p class="vertical-menu">
+                        <input type="button" class="w3-btn w3-ripple" value="About Me"
+                               onclick="location.href='#profile-div-right-side-about_me'">
+                    </p>
+                </div>
+                <div class="w3-card-4 w3-right w3-cell w3-cell-middle profile-div-right-side card-background horizontal-menu">
+                    <div class="profile-tab" id="profile-div-right-side-profile">
+                        <div class="profile-div-right-side-profile">
+                            <h5>Username</h5>
+                            <p class="w3-opacity">
+                                Sina
+                            </p>
+                        </div>
+                        <div class="profile-div-right-side-profile">
+                            <h5>Email</h5>
+                            <p class="w3-opacity">
+                                Mohammad.h4s4ni@gmail.com
+                            </p>
+                        </div>
+                        <div class="profile-div-right-side-profile">
+                            <h5>About Me</h5>
+
+                            <p class="w3-opacity"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores autem, eligendi ex facere fugit hic illum odio praesentium similique. Atque blanditiis cumque molestiae tempora? Ex modi quam reiciendis soluta?</span><span>Aliquid consectetur maxime non nostrum, nulla odio? Accusantium beatae earum eum iure minima molestiae natus quasi ratione voluptas voluptatem. Ad asperiores beatae deserunt doloribus labore neque quidem sed? Dolor, tempore.</span><span>Accusamus amet assumenda aut autem commodi dicta earum eligendi eos esse eum eveniet explicabo fugit illum ipsa nam natus nisi nostrum odio qui quia reiciendis repellat tenetur, ut vel voluptatum?</span>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="profile-tab" id="profile-div-right-side-change_info">
+                        <form>
+                            <div class="profile-div-right-side-change_info">
+                                <label>Username</label>
+                                <p class="w3-opacity">
+                                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="text">
+                                </p>
+                            </div>
+                            <div class="profile-div-right-side-change_info">
+                                <label>Email</label>
+                                <p class="w3-opacity">
+                                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="email">
+                                </p>
+                            </div>
+
+                            <div class=" w3-center profile-div-right-side-change_info" style="margin-top: 60px">
+                                <button class="w3-btn w3-ripple" id="btn-profile-change_info">Send</button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="profile-tab" id="profile-div-right-side-password">
+                        <form>
+                            <div class="profile-div-right-side-change_info">
+                                <label>Old Passsword</label>
+                                <p class="w3-opacity">
+                                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="text">
+                                </p>
+                            </div>
+                            <div class="profile-div-right-side-password">
+                                <label>New Password</label>
+                                <p class="w3-opacity">
+                                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="email">
+                                </p>
+                            </div>
+
+                            <div class="profile-div-right-side-password">
+                                <label>Confirm New Password</label>
+                                <p class="w3-opacity">
+                                    <input class="w3-input w3-opacity w3-text-white input-transparent" type="email">
+                                </p>
+                            </div>
+
+                            <div class=" w3-center profile-div-right-side-password" style="margin-top: 60px">
+                                <button class="w3-btn w3-ripple" id="btn-profile-password">Send</button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="profile-tab" id="profile-div-right-side-about_me">
+                        <form>
+                            <div class="profile-div-right-side-about_me">
+                                <label>About Me</label>
+                                <p class="w3-opacity card-background">
+                            <textarea rows="13" cols="20" class="w3-input w3-opacity w3-text-white input-transparent"
+                                      type="text"></textarea>
+                                </p>
+                            </div>
+                            <div class=" w3-center profile-div-right-side-about_me" style="margin-top: 60px">
+                                <button class="w3-btn w3-ripple"id="btn-profile-about_me">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--   Story Card   -->
+            <div class="w3-card-4 w3-animate-opacity story-div" id="story">
+                <div class="w3-center w3-left w3-cell w3-cell-middle story-div-left-side">
+                    <div class="story-div-left-side-icon">
+                        <i class="w3-right w3-cell-middle fa fa-chevron-right" style="position:absolute; top:50%;
+                         right: 9px; transform:translateY(-50%);"></i>
+                    </div>
+                    <div class="story-div-left-side-list">
+                        <p>
+                        <h3 class="w3-center"><b>Story</b></h3>
+                        </p>
+                        <div>
+                            <form action="#">
+                                <input class="w3-input w3-opacity w3-text-white input-transparent search-input"
+                                       type="text">
+                                <button class="w3-btn w3-ripple search-input-button" id="btn-story-search" onclick="btn_story_search()">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="w3-padding story-div-left-side-story_list custom-scroll">
+                            <ul class="w3-ul">
+                                <li class="item">Lorem ipsum dolor.</li>
+                                <li class="item">Dolores perferendis, praesentium?</li>
+                                <li class="item">Aliquam asperiores, nobis!</li>
+                                <li class="item">Dolorem, eaque, quisquam!</li>
+                                <li class="item">Cumque, sequi, ullam?</li>
+                                <li class="item">Deserunt, fugiat odit!</li>
+                                <li class="item">Accusamus, ea, perferendis.</li>
+                                <li class="item">Quod similique, voluptates?</li>
+                                <li class="item">Officia, quos, sapiente?</li>
+                                <li class="item">Aut dolor, sed.</li>
+                                <li class="item">Aliquid, assumenda, eius?</li>
+                                <li class="item">Ducimus, veniam, voluptate?</li>
+                                <li class="item">Debitis, illo reiciendis.</li>
+                                <li class="item">Earum magnam, minima.</li>
+                                <li class="item">Ipsam minima, voluptatibus.</li>
+                                <li class="item">Blanditiis, laboriosam suscipit?</li>
+                                <li class="item">Aliquam esse, quibusdam!</li>
+                                <li class="item">Dolorem quisquam, sint!</li>
+                                <li class="item">Fugiat, minus reiciendis!</li>
+                                <li class="item">A labore, odio!</li>
+                                <li class="item">Eius, nihil, sint!</li>
+                                <li class="item">Assumenda autem, ea?</li>
+                                <li class="item">Excepturi, laborum reprehenderit?</li>
+                                <li class="item">Nemo, tenetur voluptatibus!</li>
+                                <li class="item">Nesciunt, praesentium sit!</li>
+                                <li class="item">Deserunt, dolorem harum?</li>
+                                <li class="item">Aliquid, illum, porro?</li>
+                                <li class="item">Ipsum maiores, nam?</li>
+                                <li class="item">Non, reprehenderit, voluptas!</li>
+                                <li class="item">Nesciunt nobis, numquam?</li>
+                                <li class="item">Dolore, provident, voluptatibus.</li>
+                                <li class="item">Dolore, nulla, ullam?</li>
+                                <li class="item">Delectus, minima tenetur?</li>
+                                <li class="item">Amet, doloremque iste?</li>
+                                <li class="item">Est incidunt, recusandae.</li>
+                                <li class="item">Magni obcaecati, voluptatibus.</li>
+                                <li class="item">Illum placeat, rem.</li>
+                                <li class="item">Consequuntur placeat, sint!</li>
+                                <li class="item">Nesciunt, obcaecati, tempore?</li>
+                                <li class="item">Ab, quam, ratione.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-card-4 w3-right w3-cell w3-padding w3-cell-middle story-div-right-side custom-scroll">
+                    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi dolorem ex explicabo fugit illo in ipsam laudantium maxime, pariatur saepe sed, soluta suscipit unde vero! Asperiores autem dolore recusandae?</span><span>Accusamus ad adipisci alias aspernatur autem blanditiis cum doloribus dolorum, eveniet fugit harum incidunt mollitia natus non nostrum sequi similique, tempore velit! Ab atque corporis earum eveniet illo magni necessitatibus!</span><span>Accusantium consequuntur doloremque temporibus. A, amet asperiores, corporis dolore dolorum facilis fugit id, ipsam iste maiores modi necessitatibus nisi nostrum odio officiis porro quia reprehenderit rerum saepe suscipit ullam veniam.</span><span>Ad aliquam aut corporis dolore doloribus enim eos explicabo harum hic iste nobis numquam obcaecati, odit omnis porro ratione repudiandae sapiente! Blanditiis consequuntur expedita molestias nam officiis qui voluptatibus? Consequatur!</span><span>Adipisci aliquam corporis cupiditate dignissimos dolorem doloremque ducimus earum eligendi error esse ex in ipsam libero magni maxime minima, modi molestiae nulla quas repellendus reprehenderit saepe temporibus velit veritatis voluptas.</span><span>Amet beatae cupiditate eius fugiat impedit iusto, neque obcaecati quae reprehenderit saepe, veniam voluptatibus. Asperiores autem, debitis est excepturi explicabo fuga illum obcaecati quam quos rerum saepe, sed, ullam voluptate?</span><span>Autem corporis distinctio, dolor dolore dolores ducimus eos esse harum incidunt ipsam itaque laboriosam modi natus necessitatibus, nulla placeat praesentium quae quaerat quam quidem ratione repudiandae tempora vel voluptas, voluptatibus?</span><span>Atque aut delectus eveniet fugit id illum nisi officiis veritatis? A animi aperiam commodi est impedit magnam nulla quia repellendus vitae voluptatum? Adipisci assumenda debitis dignissimos eligendi, nemo perspiciatis sint?</span><span>Atque cupiditate debitis et facilis inventore libero minima necessitatibus nisi pariatur possimus, reiciendis similique, sit tenetur. Debitis deleniti deserunt esse expedita, facilis modi nemo quibusdam quidem quos recusandae ut voluptatum.</span><span>Eos, odio optio. Ad commodi dolor dolore, ducimus, earum esse eveniet ex exercitationem harum hic inventore labore maxime nihil odit omnis, perferendis possimus praesentium quia rerum similique tenetur ut voluptatum!</span><span>Autem dolorum hic ipsa molestiae nam perferendis ratione similique, tempora? Consectetur debitis ea, fugit ipsam libero optio perspiciatis porro, saepe sequi similique temporibus unde, vel veritatis. Molestiae nisi porro soluta.</span><span>Aliquid assumenda exercitationem itaque, molestiae non odit officia quam quis quo rem sequi tempore ullam voluptatum! Ipsam iusto soluta voluptate. Commodi eaque fugit molestias nisi praesentium quae saepe vitae voluptas?</span><span>Consequuntur culpa dolorem perspiciatis quod temporibus? Asperiores autem in laboriosam laborum nisi numquam optio porro quod veniam voluptatibus. Aperiam doloremque incidunt, laboriosam nesciunt non nostrum obcaecati quis quisquam sapiente sed.</span><span>Architecto cum eveniet molestiae perferendis suscipit? Amet consectetur consequuntur delectus deleniti eos error et ex in, iure necessitatibus obcaecati perferendis placeat quam quasi recusandae, reiciendis sequi temporibus veritatis vitae, voluptates.</span><span>Consequatur dignissimos dolore ea eum expedita, impedit, maiores natus porro quae quod repellendus reprehenderit repudiandae, temporibus voluptate voluptatibus! Amet at deserunt ea earum enim esse excepturi facere itaque labore voluptate!</span><span>Animi deserunt fuga, nulla optio quis repellendus sapiente voluptates voluptatibus. Aliquid aut blanditiis cumque dignissimos doloremque esse excepturi fuga, fugit laborum nemo nesciunt obcaecati ratione rerum veniam vero voluptate voluptates.</span><span>Accusamus animi dicta dolores earum eius eos minima nemo porro quam quibusdam. Accusantium alias beatae debitis dolorem eaque est iure laboriosam porro quaerat, quasi quisquam quo suscipit tempore unde voluptatibus?</span><span>Consequatur corporis expedita illum tenetur. Fugiat magnam natus tempora. Ab architecto, blanditiis cum esse excepturi expedita explicabo necessitatibus nobis pariatur quas, quasi qui quos rem repellat sed tempora vel voluptate!</span><span>Accusantium aperiam atque corporis cumque debitis dolore dolores, esse facilis in inventore labore laborum libero magni nisi non porro quaerat, quibusdam quod reiciendis rerum saepe tempore veritatis voluptas voluptates voluptatibus.</span><span>Animi aperiam commodi corporis culpa dolore eaque enim est eveniet, excepturi explicabo in inventore ipsam ipsum iste libero molestiae neque numquam officiis porro possimus quam quas quis sed sequi voluptates.</span><span>Beatae, maiores, perspiciatis! Assumenda autem commodi consequatur culpa eos maxime minima, mollitia natus nisi provident qui repellat, ut veniam, voluptatibus voluptatum. Accusantium ea iste iure provident repellendus reprehenderit sed sequi?</span><span>Aperiam architecto assumenda blanditiis cumque cupiditate deserunt dolorem ducimus eaque eligendi, eos ex id impedit in laborum laudantium nam nesciunt numquam odit officiis quaerat quos rem repellendus similique suscipit tempore?</span><span>Aliquam debitis doloremque mollitia pariatur, ut vel veritatis vero voluptatum. Eius exercitationem fugiat illum rerum sunt tempore, temporibus? Ab architecto distinctio dolorem dolores eligendi, explicabo similique. Earum ex quae velit!</span><span>Dicta dolorum eos error et facere numquam possimus quas voluptas! Earum fugiat incidunt, nisi nostrum quisquam rem sequi. Asperiores culpa incidunt minima nam, necessitatibus non praesentium saepe voluptas voluptate voluptates.</span><span>Aspernatur eaque esse laborum minima, obcaecati repudiandae veritatis voluptate! Animi aperiam at consequuntur laborum quas! Alias consequuntur, dolorem eveniet facere in laboriosam minima, modi quidem repellendus tempore totam ullam vero.</span><span>Consequuntur distinctio dolores eaque fugiat harum, id labore laudantium libero nam nisi nostrum perspiciatis quaerat sapiente soluta voluptatibus? Ad dignissimos labore laudantium, maiores maxime modi porro quae vel. Consequuntur, debitis.</span><span>Ad animi aperiam commodi dignissimos dolor dolores doloribus eaque eos error et hic iure iusto laboriosam nam nemo, nulla possimus, quis quo quod, repellat sequi tempora totam ullam veritatis voluptatum.</span><span>Ab autem eos illum nulla obcaecati quaerat quisquam sapiente. Autem blanditiis expedita facilis illum minima, nisi nulla provident quia reprehenderit sint. Asperiores distinctio eveniet in iste, laborum minus perspiciatis quo?</span><span>Architecto doloribus, eos ex laboriosam libero modi molestias nam quibusdam quidem quisquam similique tempore voluptatum. Deserunt enim fugiat iste molestias possimus. Ad aperiam commodi consectetur earum et labore, ullam voluptatum?</span><span>Aut consequatur libero nobis numquam porro quas, quibusdam? Blanditiis dolorum eius impedit iusto maiores mollitia neque numquam officia, quam qui sed suscipit ullam velit. Facere illum optio quae quaerat totam.</span><span>A accusamus aliquid asperiores cum debitis est et facere illo in, laudantium neque quae quam rerum sint totam ut, vitae! A aperiam eaque maiores minus odit quas voluptatum? Amet, dicta.</span><span>Corporis deleniti dolores illum mollitia natus praesentium quidem repellat sed sit tempore. Cum, enim hic nemo nihil non perspiciatis provident. Beatae cupiditate ducimus earum ipsam magni omnis pariatur sunt suscipit.</span><span>A assumenda earum eos expedita fugiat fugit harum laudantium libero magnam minus modi, natus nesciunt officia perspiciatis placeat quas quisquam reiciendis rem sapiente sequi sit sunt vel, velit veritatis voluptatibus!</span><span>Aliquam eligendi eos et facilis modi numquam voluptatem? Alias, at consectetur deleniti dicta ex necessitatibus nisi perferendis repellat. Aperiam assumenda cupiditate, expedita harum mollitia odit porro quos sequi similique voluptatibus!</span><span>Aliquam aspernatur dolores eaque eos in magnam sit? Ab accusamus amet asperiores corporis doloremque eum ex exercitationem fugiat laborum nisi non nostrum officiis sapiente sit temporibus vitae, voluptas voluptatem! Quis.</span><span>Ab adipisci aut cupiditate delectus dolore earum eligendi facilis fugiat, fugit illum incidunt ipsum magnam nemo nihil nisi nobis odio perspiciatis placeat possimus provident quaerat quis recusandae unde velit vitae?</span><span>Adipisci alias aliquam aliquid aperiam, beatae cum dignissimos facilis fugiat harum illo in ipsam iste maiores minus molestias nemo nesciunt non obcaecati odio odit quaerat reiciendis sapiente sit soluta, sunt.</span><span>Aut cupiditate doloremque dolores eaque eligendi eos esse in ipsa ipsam magnam nam natus nesciunt nihil numquam perferendis, quam quas quasi qui quod quos repudiandae soluta vel voluptatem. Omnis, quisquam?</span><span>A adipisci asperiores aspernatur at autem commodi distinctio, dolorum, enim expedita hic iste iusto libero maiores molestias nemo numquam omnis quae quod rem rerum sapiente soluta ullam vel velit veniam?</span><span>A accusantium aspernatur consectetur cum dolor, dolore eius enim labore laborum maiores molestias nobis quaerat quam reprehenderit rerum sapiente similique, sint sit temporibus tenetur totam vero voluptas. Cumque eius, labore.</span>
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- end -->
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
