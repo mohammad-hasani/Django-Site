@@ -1,0 +1,85 @@
+
+
+    <script>
+        var views = {
+            'parent': 0,
+            'login': 0,
+            'register': 0,
+            'contact': 0,
+        };
+        var active_page = 0;
+        $(document).ready(function () {
+
+            views['parent'] = $('#parent');
+            views['login'] = $('#login').clone();
+            views['register'] = $('#register').clone();
+            views['contact'] = $('#contact').clone();
+            views['profile'] = $('#profile').clone();
+            views['story'] = $('#story').clone();
+
+            active_page = null;
+
+            $('#login').remove();
+            $('#register').remove();
+            $('#contact').remove();
+            $('#profile').remove();
+            $('#story').remove();
+
+            var app = angular.module("myApp", []);
+
+            app.controller("loginCtrl", function ($scope) {
+                $scope.login_http = function () {
+                    window.alert('data');
+                };
+            });
+
+        });
+    </script>
+
+
+
+
+<div class="w3-container main-div">
+
+    <div class="w3-container w3-right menu-up">
+        <input class="w3-btn w3-ripple" type="button" value="Login" onclick="change_page_animation('login')">
+        <span class="spacer-horizontal"></span>
+        <input class="w3-btn w3-ripple" type="button" value="Register" onclick="change_page_animation('register')">
+        <span class="spacer-horizontal"></span>
+        <input class="w3-btn w3-ripple" type="button" value="Contact" onclick="change_page_animation('contact')" id="btn-contact">
+        <span class="spacer-horizontal"></span>
+        <input class="w3-btn w3-ripple" type="button" value="Profile" onclick="change_page_animation('profile')" id="btn-profile">
+        <span class="spacer-horizontal"></span>
+        <input class="w3-btn w3-ripple" type="button" value="Story" onclick="change_page_animation('story')" id="btn-story">
+    </div>
+
+    <div class="w3-container">
+
+        <div class="w3-display-middle" id="parent">
+
+            <!--   Login Card   -->
+
+
+            <!--   Register Card   -->
+
+
+            <!--   Contact Card   -->
+
+
+
+            <!--   Profile Card   -->
+
+
+
+            <!--   Story Card   -->
+
+
+
+            <!-- end -->
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+/*@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');*/
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    height: 100vh;
+}
+
+.main-div {
+    background-image: url("../images/main_background0.jpg");
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.card-background {
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.login-div {
+    padding: 7px;
+    width: 400px;
+    height: fit-content;
+    position: relative;
+}
+
+.register-div {
+    padding: 7px;
+    width: 400px;
+    height: fit-content;
+    position: relative;
+}
+
+.input-transparent {
+    background-color: transparent;
+}
+
+.fade-out-1 {
+    -webkit-animation-name: fade1;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    animation-name: fade1;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.fade-in-1 {
+    -webkit-animation-name: fade1;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-direction: reverse;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    animation-name: fade1;
+    animation-duration: 1s;
+    animation-direction: reverse;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fade1 {
+    0% {
+        opacity: 1.0;
+        transform: scale(1, 1)
+    }
+    10% {
+        transform: scale(1.15, 1.15)
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0, 0)
+    }
+}
+
+@keyframes fade1 {
+    0% {
+        opacity: 1.0;
+        transform: scale(1, 1)
+    }
+    10% {
+        transform: scale(1.15, 1.15)
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0, 0)
+    }
+}
+
+.fade-out-2 {
+    -webkit-animation-name: fade2;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    animation-name: fade2;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.fade-in-2 {
+    -webkit-animation-name: fade2;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-direction: reverse;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    animation-name: fade2;
+    animation-duration: 1s;
+    animation-direction: reverse;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fade2 {
+    0% {
+        opacity: 1.0;
+        transform: scale(1, 1)
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3, 3)
+    }
+}
+
+@keyframes fade2 {
+    0% {
+        opacity: 1.0;
+        transform: scale(1, 1)
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3, 3)
+    }
+}
+
+.contact-div {
+    padding: 7px;
+    width: 1024px;
+    height: 600px;
+    position: relative;
+}
+
+.contact-div-right-side {
+    padding: 7px;
+    margin-top: 25px;
+    margin-right: 15px;
+    width: 400px;
+    height: 500px;
+    position: relative;
+}
+
+.contact-div-left-side {
+    padding: 7px;
+    margin-left: 25px;
+    width: 400px;
+    height: 500px;
+    position: relative;
+}
+
+.menu-up {
+    margin-top: 25px;
+    margin-right: 50px;
+}
+
+.spacer-horizontal {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.spacer-vertical {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.horizontal-menu {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.profile-div {
+    width: 1000px;
+    height: 600px;
+    position: relative;
+}
+
+.profile-div-left-side {
+    padding: 7px;
+    width: 200px;
+    height: 600px;
+}
+
+.profile-div-right-side {
+    width: 800px;
+    height: 600px;
+}
+
+.profile-tab {
+    width: 800px;
+    height: 600px;
+}
+
+.vertical-menu {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.profile-div-right-side-profile {
+    padding-left: 90px;
+    padding-right: 90px;
+    padding-top: 30px;
+}
+
+.profile-div-right-side-change_info {
+    padding-left: 90px;
+    padding-right: 90px;
+    padding-top: 40px;
+}
+
+.profile-div-right-side-password {
+    padding-left: 90px;
+    padding-right: 90px;
+    padding-top: 40px;
+}
+
+.profile-div-right-side-about_me {
+    padding-left: 90px;
+    padding-right: 90px;
+    padding-top: 40px;
+}
+
+.story-div {
+    width: 1200px;
+    height: 600px;
+    position: relative;
+    z-index: -2;
+}
+
+.story-div-left-side {
+    background-color: rgba(0, 0, 0, .7);
+    width: 30px;
+    height: 600px;
+    transition: width 2s;
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.story-div-left-side:hover {
+    width: 350px;
+}
+
+.story-div-left-side-icon {
+    position: absolute;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1.5s;
+}
+
+.story-div-left-side:hover > .story-div-left-side-icon {
+    opacity: 0;
+}
+
+.story-div-left-side-list {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1s;
+}
+
+.story-div-left-side:hover > .story-div-left-side-list {
+    opacity: 1;
+}
+
+.story-div-right-side {
+    width: 1170px;
+    height: 600px;
+    right: 0px;
+    position: absolute;
+    z-index: -1;
+    transition: opacity 1.5s;
+    overflow-y: scroll;
+}
+
+.story-div-left-side:hover + .story-div-right-side {
+    opacity: .3;
+}
+
+.story-div-left-side-story_list {
+    width: 100%;
+    height: 470px;
+    margin-top: 70px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #FFF;
+    background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from(#000000),
+    to(#000000),
+    color-stop(.6, #ffffff))
+}
+
+.search-input {
+    position: absolute;
+    padding-right: 40px;
+}
+
+.search-input-button {
+    position: absolute;
+    right: 0px;
+}
+
+.top-margin-60 {
+    margin-top: 60px;
+}
+
+.right_search_btn {
+    position: absolute;
+    top: 50%;
+    right: 9px;
+    transform: translateY(-50%);
+}
+
+.horizontal-list-link {
+        text-decoration: none;
+
+}
