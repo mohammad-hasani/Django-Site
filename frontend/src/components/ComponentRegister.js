@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Register extends Component {
     render() {
         return (
-            <div className="w3-card-4 w3-animate-opacity w3-padding-large register-div card-background" id="register">
+            <div className="w3-card-4 w3-padding-large register-div card-background" id="register">
                 <p>
                     <h3 className="w3-center"><b>Register</b></h3>
                 </p>

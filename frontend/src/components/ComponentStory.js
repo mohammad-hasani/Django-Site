@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Story extends Component {
     render() {
         return (
-            <div className="w3-card-4 w3-animate-opacity story-div" id="story">
+            <div className="w3-card-4 story-div card-background" id="story">
                 <div className="w3-center w3-left w3-cell w3-cell-middle story-div-left-side">
                     <div className="story-div-left-side-icon">
                         <i className="w3-right w3-cell-middle fa fa-chevron-right right-search-btn"></i>

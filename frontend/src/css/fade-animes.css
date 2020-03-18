@@ -1,0 +1,63 @@
+.fade-enter {
+    opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+    -webkit-animation-name: fade1;
+    -webkit-animation-duration: 875ms;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-direction: reverse;
+    -webkit-animation-delay: 250ms;
+    animation-name: fade1;
+    animation-duration: 875ms;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-direction: reverse;
+    animation-delay: 250ms;
+
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+    -webkit-animation-name: fade1;
+    -webkit-animation-duration: 875ms;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    animation-name: fade1;
+    animation-duration: 875ms;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+
+@-webkit-keyframes fade1 {
+    0% {
+        opacity: 1.0;
+        transform: scale(1, 1)
+    }
+    10% {
+        transform: scale(1.03, 1.03)
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0, 0)
+    }
+}
+
+@keyframes fade1 {
+    0% {
+        opacity: 1.0;
+        transform: scale(1, 1)
+    }
+    10% {
+        transform: scale(1.03, 1.03)
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0, 0)
+    }
+}

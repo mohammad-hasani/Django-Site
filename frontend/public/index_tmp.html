@@ -15,7 +15,7 @@
             views['register'] = $('#register').clone();
             views['contact'] = $('#contact').clone();
             views['profile'] = $('#profile').clone();
-            views['story'] = $('#story').clone();
+            views['story'] = $('#storyReducer').clone();
 
             active_page = null;
 
@@ -23,7 +23,7 @@
             $('#register').remove();
             $('#contact').remove();
             $('#profile').remove();
-            $('#story').remove();
+            $('#storyReducer').remove();
 
             var app = angular.module("myApp", []);
 

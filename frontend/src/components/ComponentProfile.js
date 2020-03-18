@@ -1,31 +1,41 @@
 import React, {Component} from 'react';
 
+import { withRouter } from "react-router";
+
+
 class Profile extends Component {
+
+    pageChangeHandler = (page, e) => {
+        let unblock = this.props.history.block();
+        location.href = page;
+        unblock();
+    };
+
     render() {
         return (
-            <div className="w3-card-4 w3-animate-opacity profile-div card-background" id="profile">
+            <div className="w3-card-4 profile-div card-background" id="profile">
                 <div className="w3-center w3-left w3-cell w3-cell-middle profile-div-left-side">
                     <p className="vertical-menu">
                         <button className="w3-btn w3-ripple"
-                                onClick="location.href='#profile-div-right-side-profile'">
+                                onClick={(e) => this.pageChangeHandler('#profile-div-right-side-profile', e)}>
                             Profile
                         </button>
                     </p>
                     <p className="vertical-menu">
                         <button className="w3-btn w3-ripple"
-                                onClick="location.href='#profile-div-right-side-change_info'">
+                                onClick={(e) => this.pageChangeHandler('#profile-div-right-side-change_info', e)}>
                             Change Info
                         </button>
                     </p>
                     <p className="vertical-menu">
                         <button className="w3-btn w3-ripple"
-                                onClick="location.href='#profile-div-right-side-password'">
+                                onClick={(e) => this.pageChangeHandler('#profile-div-right-side-password', e)}>
                             Password
                         </button>
                     </p>
                     <p className="vertical-menu">
                         <button className="w3-btn w3-ripple"
-                                onClick="location.href='#profile-div-right-side-about_me'">
+                                onClick={(e) => this.pageChangeHandler('#profile-div-right-side-about_me', e)}>
                             About Me
                         </button>
                     </p>
@@ -126,4 +136,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile
+export default withRouter(Profile)

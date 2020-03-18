@@ -4,10 +4,6 @@ import {Link} from "react-router-dom"
 
 class Header extends Component {
 
-    handleClickEvent = (e, nextPage) => {
-        this.props.changeComponent(nextPage);
-    };
-
     render() {
         return (
             <div className="w3-container">

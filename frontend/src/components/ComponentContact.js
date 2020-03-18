@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Contact extends Component {
     render() {
         return (
-            <div className="w3-card-4 w3-animate-opacity w3-padding-large contact-div card-background" id="contact">
+            <div className="w3-card-4 w3-padding-large contact-div card-background" id="contact">
                 <div className="w3-center w3-left w3-cell w3-cell-middle contact-div-left-side">
                     <p>
                         <h3 className="w3-center"><b>Contact</b></h3>
