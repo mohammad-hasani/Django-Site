@@ -53,6 +53,11 @@ class BackgroundAbstract extends Component {
             paperFull.install(window);
             paperFull.setup(canvas);
 
+            const onFrameLayer = new paperFull.Layer();
+            const onMouseMoveLayer = new paperFull.Layer();
+
+            onFrameLayer.activate();
+
             // making points
             for (i = 0; i < numberOfPoints; i++) {
                 const newP = new paperFull.Point(Math.floor(Math.random() * paperFull.view.size.width),
@@ -61,34 +66,58 @@ class BackgroundAbstract extends Component {
                 points.push(newPoint);
             }
 
-
             paperFull.view.onFrame = function (event) {
+                onFrameLayer.activate();
                 paperFull.project.activeLayer.removeChildren();
 
-                // making circles
+                makeCircles();
+
+                updatePointsAndCircles();
+
+                makeLines();
+
+            };
+
+            paperFull.view.onMouseMove = function (event) {
+                onMouseMoveLayer.activate();
+                paperFull.project.activeLayer.removeChildren();
+                const mousePoint = new paperFull.Point(event.point.x, event.point.y);
+                for (i = 0; i < numberOfPoints; i++) {
+                    drawLine(mousePoint, points[i].p);
+                }
+            };
+
+            function makeCircles() {
                 for (i = 0; i < numberOfPoints; i++) {
                     circleStyle.position = points[i].p;
                     const circle = new paperFull.Path.Circle(circleStyle);
                     circle.opacity = .3;
                     points[i].circle = circle;
                 }
+            }
 
-                for (i = 0; i < numberOfPoints; i++) {
-                    points[i].updatePointAndCircle();
-                }
-
-                // making lines
+            function makeLines() {
                 for (i = 0; i < numberOfPoints; i++) {
                     for (j = i + 1; j < numberOfPoints; j++) {
-                        const distance = points[i].p.getDistance(points[j].p);
-                        if (distance < maxDistance) {
-                            const path = new paperFull.Path();
-                            path.moveTo(points[i].p);
-                            path.lineTo(points[j].p);
-                            path.strokeColor = color;
-                            path.opacity = (1 - distance / maxDistance) / 2;
-                        }
+                        drawLine(points[i].p, points[j].p);
                     }
+                }
+            }
+
+            function drawLine(i, j) {
+                const distance = i.getDistance(j);
+                if (distance < maxDistance) {
+                    const path = new paperFull.Path();
+                    path.moveTo(i);
+                    path.lineTo(j);
+                    path.strokeColor = color;
+                    path.opacity = (1 - distance / maxDistance) / 2;
+                }
+            }
+
+            function updatePointsAndCircles() {
+                for (i = 0; i < numberOfPoints; i++) {
+                    points[i].updatePointAndCircle();
                 }
             }
         };
