@@ -53,6 +53,8 @@ class BackgroundAbstract extends Component {
             paperFull.install(window);
             paperFull.setup(canvas);
 
+            var mousePosition = new paperFull.Point(0, 0);
+
             const onFrameLayer = new paperFull.Layer();
             const onMouseMoveLayer = new paperFull.Layer();
 
@@ -76,16 +78,23 @@ class BackgroundAbstract extends Component {
 
                 makeLines();
 
+                onMouseMoveLayer.activate();
+                paperFull.project.activeLayer.removeChildren();
+
+                MouseEffect();
+
             };
 
             paperFull.view.onMouseMove = function (event) {
-                onMouseMoveLayer.activate();
-                paperFull.project.activeLayer.removeChildren();
-                const mousePoint = new paperFull.Point(event.point.x, event.point.y);
-                for (i = 0; i < numberOfPoints; i++) {
-                    drawLine(mousePoint, points[i].p);
-                }
+                mousePosition = new paperFull.Point(event.point.x, event.point.y);
             };
+
+            function MouseEffect() {
+
+                for (i = 0; i < numberOfPoints; i++) {
+                    drawLine(mousePosition, points[i].p);
+                }
+            }
 
             function makeCircles() {
                 for (i = 0; i < numberOfPoints; i++) {

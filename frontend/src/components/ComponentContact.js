@@ -1,6 +1,30 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+
+import {
+    fetchContactInfo,
+    sendContactInfo
+} from '../redux/contact/actions'
+
+import {convertStringTOList} from "../scripts/general/helper";
 
 class Contact extends Component {
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.sendData(this.state);
+    };
+
+    handleDataChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]: value});
+    };
+
+    componentDidMount() {
+        this.props.fetchData();
+    }
+
     render() {
         return (
             <div className="w3-card-4 w3-padding-large contact-div card-background" id="contact">
@@ -8,31 +32,42 @@ class Contact extends Component {
                     <p>
                         <h3 className="w3-center"><b>Contact</b></h3>
                         <p className="w3-opacity">
-                            Machine learning is the scientific study of algorithms and statistical models that computer
-                            systems use to perform a specific task without using explicit instructions, relying on
-                            patterns
-                            and inference instead. It is seen as a subset of artificial intelligence.
+                            {this.props.data.body}
                         </p>
                     </p>
                     <br/>
                     <p>
                         <h4>Address</h4>
                         <p className="w3-opacity">
-                            Mindelsohn Way, Birmingham B15 2TH, United Kingdom
+                            {this.props.data.address}
                         </p>
                     </p>
 
                     <p>
                         <h4>Phone</h4>
                         <p className="w3-opacity">
-                            +98 938 341 19 67
+                            {(() => {
+                                const phones = convertStringTOList(this.props.data.phone);
+                                if (phones !== null) {
+                                    return phones.map(item => {
+                                        return <p>{item}</p>
+                                    })
+                                }
+                            })()}
                         </p>
                     </p>
 
                     <p>
                         <h4>E-mail</h4>
                         <p className="w3-opacity">
-                            Mohammad.h4s4ni@gmail.com
+                            {(() => {
+                                const emails = convertStringTOList(this.props.data.email);
+                                if (emails !== null) {
+                                    return emails.map(item => {
+                                        return <p>{item}</p>
+                                    })
+                                }
+                            })()}
                         </p>
                     </p>
                 </div>
@@ -41,27 +76,28 @@ class Contact extends Component {
                     <p>
                         <h3 className="w3-center"><b>Contact Form</b></h3>
                     </p>
-                    <br/><br/>
-                    <form action="#" className="w3-opacity">
+                    <br/>
+                    <form onSubmit={this.handleSubmit} className="w3-opacity">
                         <label>Your Name</label>
-                        <input className="w3-input w3-opacity w3-text-white input-transparent" type="text"/>
+                        <input className="w3-input w3-opacity w3-text-white input-transparent" type="text"
+                        onChange={this.handleDataChange} name='name'/>
                         <br/>
                         <label>Your Email</label>
-                        <input className="w3-input w3-opacity w3-text-white input-transparent" type="text"/>
+                        <input className="w3-input w3-opacity w3-text-white input-transparent" type="text"
+                        onChange={this.handleDataChange} name='email'/>
                         <br/>
                         <label>Your Phone</label>
                         <input className="w3-input w3-opacity w3-text-white input-transparent"
-                               type="text"/>
+                               type="text" onChange={this.handleDataChange} name='phone'/>
                         <br/>
                         <label>Message</label>
                         <textarea rows="3" cols="20"
                                   className="w3-input w3-opacity w3-text-white input-transparent"
-                                  type="text"></textarea>
+                                  type="text" onChange={this.handleDataChange} name='message'></textarea>
 
                         <br/>
                         <p className="w3-center">
-                            <button className="w3-btn w3-ripple"
-                                    id="btn-contact-send">Send
+                            <button className="w3-btn w3-ripple" type='submit'>Send
                             </button>
                         </p>
                     </form>
@@ -71,4 +107,18 @@ class Contact extends Component {
     }
 }
 
-export default Contact
+const mapStateToProps = state => {
+    return {
+        loading: state.contact.loading,
+        data: state.contact.data
+    }
+};
+
+const matchDispatchToProps = dispatch => {
+    return {
+        fetchData: () => dispatch(fetchContactInfo()),
+        sendData: data => dispatch(sendContactInfo(data))
+    }
+};
+
+export default connect(mapStateToProps, matchDispatchToProps)(Contact);

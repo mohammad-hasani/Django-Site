@@ -10,7 +10,7 @@ body {
 }
 
 .root_div {
-  background-image: url("../images/main_background0.jpg");
+  background-image: url("../images/main_background1.jpg");
   background-position: center;
   background-size: cover;
   width: 100%;
@@ -39,9 +39,9 @@ body {
 .register-div {
   padding: 7px;
   width: 400px;
-  height: 450px;
+  height: 550px;
   position: absolute;
-  top: calc(50% - (450px / 2) - 100px);
+  top: calc(50% - (550px / 2) - 100px);
   left: calc(50% - (400px / 2));
 }
 

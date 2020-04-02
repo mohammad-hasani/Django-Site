@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+import {Cookies} from 'react-cookie'
 
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 
@@ -17,11 +20,24 @@ import './css/fade-animes.css'
 import './css/design.css'
 
 
-import Test from "./components/ComponentTest";
-
 class App extends Component {
+    constructor(props) {
+        super(props);
+        // const cookie = new Cookies();
+        // this.state = {
+        //     email: cookie.get('email'),
+        //     isAuthenticated: cookie.get('email') !== undefined ? true: false
+        // };
+    }
 
-    render() {
+    checkAuthentication = () => {
+      this.state = {
+            isAuthenticated: this.props.token !== undefined || '' ? true: false
+        };
+    };
+
+    render(){
+        this.checkAuthentication();
         return (
             <div className="root_div">
                 <BackgroundAbstract/>
@@ -47,15 +63,18 @@ class App extends Component {
                                                 <Route path="/register">
                                                     <Register/>
                                                 </Route>
+                                                { this.state.isAuthenticated &&
                                                 <Route path="/contact">
                                                     <Contact/>
-                                                </Route>
+                                                </Route>}
+                                                { this.state.isAuthenticated &&
                                                 <Route path="/profile">
                                                     <Profile/>
-                                                </Route>
+                                                </Route>}
+                                                {this.state.isAuthenticated &&
                                                 <Route path="/story">
                                                     <Story/>
-                                                </Route>
+                                                </Route>}
                                             </Switch>
                                         </CSSTransition>
                                     </TransitionGroup>
@@ -71,4 +90,11 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        token: state.login.token,
+        email: state.login.email
+    }
+};
+
+export default connect(mapStateToProps, null)(App);

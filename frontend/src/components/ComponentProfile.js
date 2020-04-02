@@ -71,13 +71,6 @@ class Profile extends Component {
                                     <input className="w3-input w3-opacity w3-text-white input-transparent" type="text"/>
                                 </p>
                             </div>
-                            <div className="profile-div-right-side-change_info">
-                                <label>Email</label>
-                                <p className="w3-opacity">
-                                    <input className="w3-input w3-opacity w3-text-white input-transparent"
-                                           type="email"/>
-                                </p>
-                            </div>
 
                             <div className=" w3-center profile-div-right-side-change_info top-margin-60">
                                 <button className="w3-btn w3-ripple" id="btn-profile-change_info">Send</button>
