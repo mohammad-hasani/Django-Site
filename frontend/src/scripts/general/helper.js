@@ -25,3 +25,8 @@ export const getTokenHeader = (headers=undefined) => {
         return headers;
     }
 };
+
+export const getEmail = () => {
+    const email = store.getState().login.email;
+    return {'email': email};
+};

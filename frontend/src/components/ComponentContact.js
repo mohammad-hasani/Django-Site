@@ -43,33 +43,33 @@ class Contact extends Component {
                         </p>
                     </p>
 
-                    <p>
+                    <div>
                         <h4>Phone</h4>
-                        <p className="w3-opacity">
+                        <ul className="w3-opacity list-hide-bullet">
                             {(() => {
                                 const phones = convertStringTOList(this.props.data.phone);
                                 if (phones !== null) {
                                     return phones.map(item => {
-                                        return <p>{item}</p>
+                                        return <li key={item}>{item}</li>
                                     })
                                 }
                             })()}
-                        </p>
-                    </p>
+                        </ul>
+                    </div>
 
-                    <p>
+                    <div>
                         <h4>E-mail</h4>
-                        <p className="w3-opacity">
+                        <ul className="w3-opacity list-hide-bullet">
                             {(() => {
                                 const emails = convertStringTOList(this.props.data.email);
                                 if (emails !== null) {
                                     return emails.map(item => {
-                                        return <p>{item}</p>
+                                        return <li key={item}>{item}</li>
                                     })
                                 }
                             })()}
-                        </p>
-                    </p>
+                        </ul>
+                    </div>
                 </div>
                 <div
                     className="w3-card-4 w3-right w3-cell w3-cell-middle w3-padding-large contact-div-right-side card-background">

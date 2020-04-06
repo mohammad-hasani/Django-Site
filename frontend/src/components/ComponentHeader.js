@@ -20,16 +20,25 @@ class Header extends Component {
         return (
             <div className="w3-container">
                 <ul className="horizontal-list">
+                    {!this.state.isAuthenticated &&
                     <li className="w3-btn w3-ripple">
                         <Link className="horizontal-list-link" to="/login">
                             Login
                         </Link>
-                    </li>
+                    </li>}
+                    {!this.state.isAuthenticated &&
                     <li className="w3-btn w3-ripple">
                         <Link className="horizontal-list-link" to="/register">
                             Register
                         </Link>
+                    </li>}
+                    {this.state.isAuthenticated &&
+                    <li className="w3-btn w3-ripple">
+                        <Link className="horizontal-list-link" to='/logout'>
+                            Logout
+                        </Link>
                     </li>
+                    }
                     {this.state.isAuthenticated &&
                     <li className="w3-btn w3-ripple">
                         <Link className="horizontal-list-link" to="/contact">

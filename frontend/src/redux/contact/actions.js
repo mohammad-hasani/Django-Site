@@ -6,8 +6,9 @@ import {
     CONTACT_FAILURE
 } from "./types";
 
-
+import {getTokenHeader} from "../../scripts/general/helper";
 import {SERVER_ADDR} from '../index'
+
 
 const url = SERVER_ADDR + 'api/contactinfo';
 
@@ -42,7 +43,7 @@ const Failure = error => {
 export const fetchContactInfo = () => {
     return (dispatch) => {
         dispatch(Request);
-        axios.get(url)
+        axios.get(url, getTokenHeader())
             .then(response => {
                 const data = response.data;
                 dispatch(fetchContactInfoSuccess(data))
@@ -59,7 +60,7 @@ export const fetchContactInfo = () => {
 export const sendContactInfo = data => {
     return (dispatch) => {
         dispatch(Request);
-        axios.post(url, data)
+        axios.post(url, data, getTokenHeader())
             .then(response => {
                 const data = response.data;
                 dispatch(sendContactMessageSuccess(data))

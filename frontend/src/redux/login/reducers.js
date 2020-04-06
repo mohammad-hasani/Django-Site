@@ -1,7 +1,7 @@
 import {
     LOGIN_REQUEST,
-    LOGIN_FETCH_SUCCESS,
     LOGIN_SEND_SUCCESS,
+    LOGOUT_SEND_SUCCESS,
     LOGIN_FAILURE
 } from "./types";
 
@@ -26,14 +26,19 @@ export const loginReducer = (state = initialState, action) => {
                 email: action.email,
                 error: ''
             };
+        case LOGOUT_SEND_SUCCESS:
+            return {
+                loading: false,
+                token: action.token,
+                email: action.email,
+                error: ''
+            };
         case LOGIN_FAILURE:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
             };
-
-
         default:
             return state;
     }

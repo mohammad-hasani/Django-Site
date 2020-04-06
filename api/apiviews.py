@@ -57,6 +57,7 @@ class Register(APIView):
 
 class Logout(APIView):
     def get(self, request):
+
         request.user.auth_token.delete()
         return Response(1, status=HTTP_200_OK)
 
@@ -80,14 +81,18 @@ class Contact(APIView):
 
 
 class Profile(APIView):
+
+    permission_classes = {AllowAny}
+
     def get(self, request):
-        # email = request.data.email
-        # profile_data = models.Profile.objects.first({'email': email})
+        email = request.GET['email']
+        print({'email': email})
+        profile_data = models.Profile.objects.all().first()
+        print(profile_data)
         # serialized_data = serializers.ProfileSerializer(profile_data)
         # data = serialized_data.data
         # return Response(data)
-
-        return Response('ok')
+        return Response(1)
 
     def post(self, request):
         return Response('ok')

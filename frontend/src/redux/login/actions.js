@@ -3,13 +3,17 @@ import axios from 'axios'
 import {
     LOGIN_REQUEST,
     LOGIN_SEND_SUCCESS,
+    LOGOUT_SEND_SUCCESS,
     LOGIN_FAILURE
 } from "./types";
 
+import {getTokenHeader} from "../../scripts/general/helper";
 
 import {SERVER_ADDR} from '../index'
 
-const url = SERVER_ADDR + 'api/login';
+const url_login = SERVER_ADDR + 'api/login';
+const url_logout = SERVER_ADDR + 'api/logout';
+
 
 export const Request = () => {
     return ({
@@ -20,6 +24,15 @@ export const Request = () => {
 const sendLoginSuccess = (token, email) => {
     return ({
         type: LOGIN_SEND_SUCCESS,
+        token: token,
+        email: email
+    })
+};
+
+const sendLogoutSuccess = (token, email) => {
+    return ({
+        type: LOGOUT_SEND_SUCCESS,
+        payload: undefined,
         token: token,
         email: email
     })
@@ -37,7 +50,7 @@ const Failure = error => {
 export const sendLogin = data => {
     return (dispatch) => {
         dispatch(Request);
-        axios.post(url, data)
+        axios.post(url_login, data)
             .then(response => {
                 const email = data.email;
                 const token = response.data.token;
@@ -50,6 +63,28 @@ export const sendLogin = data => {
             })
             .catch(error => {
                 const errorMsg = error.message;
+                dispatch(Failure(errorMsg))
+            })
+    }
+};
+
+export const sendLogout = () => {
+    return (dispatch) => {
+        dispatch(Request);
+        axios.get(url_logout, getTokenHeader())
+            .then(response => {
+                const email = undefined;
+                const token = undefined;
+
+                const cookie = new Cookies();
+                cookie.set('email', email, {path: '/'});
+                cookie.set('token', token, {path: '/'});
+
+                dispatch(sendLogoutSuccess(token, email))
+            })
+            .catch(error => {
+                const errorMsg = error.message;
+                console.log(errorMsg)
                 dispatch(Failure(errorMsg))
             })
     }

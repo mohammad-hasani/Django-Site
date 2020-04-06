@@ -4,15 +4,17 @@ import {connect} from 'react-redux';
 import {Cookies} from 'react-cookie'
 
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
-
+import {createBrowserHistory} from "history";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 import Header from './components/ComponentHeader';
 import Login from './components/ComponentLogin';
 import Register from './components/ComponentRegister';
+import Logout from "./components/ComponentLogout";
 import Contact from './components/ComponentContact';
 import Profile from "./components/ComponentProfile";
 import Story from "./components/ComponentStory";
+
 
 import BackgroundAbstract from "./scripts/design/ComponentBackgroundAbstract";
 
@@ -28,21 +30,29 @@ class App extends Component {
         //     email: cookie.get('email'),
         //     isAuthenticated: cookie.get('email') !== undefined ? true: false
         // };
+        const history = createBrowserHistory(props);
+        this.state = {
+            isAuthenticated: false,
+            history: history
+        }
     }
 
     checkAuthentication = () => {
-      this.state = {
-            isAuthenticated: this.props.token !== undefined || '' ? true: false
+        this.state = {
+            ...this.state,
+            isAuthenticated: this.props.token !== undefined || '' ? true : false
         };
     };
 
-    render(){
+
+    render() {
+        console.log(this.state);
         this.checkAuthentication();
         return (
             <div className="root_div">
                 <BackgroundAbstract/>
                 <div className="w3-container w3-text-white main-div">
-                    <BrowserRouter>
+                    <BrowserRouter history={this.state.history}>
                         <div className="w3-container menu-up">
                             <div className="w3-right">
                                 <Header/>
@@ -57,24 +67,29 @@ class App extends Component {
                                             timeout={2000}
                                             classNames='fade'>
                                             <Switch location={location}>
+
                                                 <Route path="/login">
                                                     <Login/>
                                                 </Route>
+
                                                 <Route path="/register">
                                                     <Register/>
                                                 </Route>
-                                                { this.state.isAuthenticated &&
+                                                <Route path='/logout'>
+                                                    <Logout/>
+                                                </Route>
+
                                                 <Route path="/contact">
                                                     <Contact/>
-                                                </Route>}
-                                                { this.state.isAuthenticated &&
+                                                </Route>
+
                                                 <Route path="/profile">
                                                     <Profile/>
-                                                </Route>}
-                                                {this.state.isAuthenticated &&
+                                                </Route>
+
                                                 <Route path="/story">
                                                     <Story/>
-                                                </Route>}
+                                                </Route>
                                             </Switch>
                                         </CSSTransition>
                                     </TransitionGroup>

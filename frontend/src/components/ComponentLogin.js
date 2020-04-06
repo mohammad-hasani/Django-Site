@@ -3,14 +3,24 @@ import {connect} from 'react-redux';
 
 import {sendLogin} from '../redux/login/actions'
 import {Link} from "react-router-dom";
-
+import {Redirect} from "react-router-dom";
 
 
 class Login extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false
+    }
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.sendData(this.state);
+        this.setState({
+            redirect: true
+        });
     };
 
     handleDataChange = (e) => {
@@ -20,6 +30,9 @@ class Login extends Component {
     };
 
     render() {
+        if (this.state.redirect){
+            return <Redirect to='/' />
+        }
         return (
             <div className="w3-card-4 w3-padding-large login-div card-background" id="login">
                 <p>
@@ -29,11 +42,12 @@ class Login extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>Email</label>
                     <input className="w3-input w3-opacity w3-text-white input-transparent" type="text" name="email"
-                    onChange={this.handleDataChange}/>
+                           onChange={this.handleDataChange}/>
                     <br/>
                     <label>Password</label>
-                    <input className="w3-input w3-opacity w3-text-white input-transparent" type="password" name="password"
-                    onChange={this.handleDataChange}/>
+                    <input className="w3-input w3-opacity w3-text-white input-transparent" type="password"
+                           name="password"
+                           onChange={this.handleDataChange}/>
                     <br/>
                     <p className="w3-center">
                         <button className="w3-btn w3-ripple" id="btn-login-send" type="submit">

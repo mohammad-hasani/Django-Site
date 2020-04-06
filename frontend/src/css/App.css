@@ -270,4 +270,11 @@ body {
   height: 100vh;
 }
 
+.list-hide-bullet {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+}
+
 /*# sourceMappingURL=App.css.map */
