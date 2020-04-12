@@ -21,7 +21,8 @@ export const getTokenHeader = (headers=undefined) => {
         const header = {'headers': {'Authorization': `Token ${token}`}};
         return header;
     }else{
-        headers.headers['Authorization'] = `Token ${token}`;
+        console.log(headers);
+        headers['headers'] = {'Authorization': `Token ${token}`};
         return headers;
     }
 };

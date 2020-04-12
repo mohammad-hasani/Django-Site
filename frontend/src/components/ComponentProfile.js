@@ -1,14 +1,54 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import {withRouter} from 'react-router-dom';
 
-import { withRouter } from "react-router";
+import {fetchProfile, sendProfile} from "../redux/profile/actions";
 
 
 class Profile extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.props.getData();
+    }
 
     pageChangeHandler = (page, e) => {
         let unblock = this.props.history.block();
         location.href = page;
         unblock();
+    };
+
+    handleDataChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]: value});
+    };
+
+    handleUsername = (e) => {
+        e.preventDefault();
+        const data = {'username': this.state.username};
+        this.props.sendData(data);
+    };
+
+    handlePassword = (e) => {
+        e.preventDefault();
+        if (this.state.new_password != this.state.new_password2) {
+            return;
+        }
+        const data = {
+            'old_password': this.state.old_password,
+            'new_password': this.state.new_password
+        };
+        this.props.sendData(data);
+    };
+
+    handleAboutMe = (e) => {
+        e.preventDefault();
+        const data = {'about_me': this.state.about_me};
+        this.props.sendData(data);
     };
 
     render() {
@@ -46,51 +86,63 @@ class Profile extends Component {
                         <div className="profile-div-right-side-profile">
                             <h5>Username</h5>
                             <p className="w3-opacity">
-                                Sina
+                                {this.props.data.username}
                             </p>
                         </div>
                         <div className="profile-div-right-side-profile">
                             <h5>Email</h5>
                             <p className="w3-opacity">
-                                Mohammad.h4s4ni@gmail.com
+                                {this.props.email}
                             </p>
                         </div>
                         <div className="profile-div-right-side-profile">
                             <h5>About Me</h5>
 
-                            <p className="w3-opacity"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores autem, eligendi ex facere fugit hic illum odio praesentium similique. Atque blanditiis cumque molestiae tempora? Ex modi quam reiciendis soluta?</span><span>Aliquid consectetur maxime non nostrum, nulla odio? Accusantium beatae earum eum iure minima molestiae natus quasi ratione voluptas voluptatem. Ad asperiores beatae deserunt doloribus labore neque quidem sed? Dolor, tempore.</span><span>Accusamus amet assumenda aut autem commodi dicta earum eligendi eos esse eum eveniet explicabo fugit illum ipsa nam natus nisi nostrum odio qui quia reiciendis repellat tenetur, ut vel voluptatum?</span>
+                            <p className="w3-opacity">
+                                {(() => {
+                                    try {
+                                        return this.props.data.profile.about_me
+                                    } catch (e) {
+
+                                    }
+                                })()}
                             </p>
 
                         </div>
                     </div>
                     <div className="profile-tab" id="profile-div-right-side-change_info">
-                        <form>
+                        <form onSubmit={this.handleUsername}>
                             <div className="profile-div-right-side-change_info">
                                 <label>Username</label>
                                 <p className="w3-opacity">
-                                    <input className="w3-input w3-opacity w3-text-white input-transparent" type="text"/>
+                                    <input className="w3-input w3-opacity w3-text-white input-transparent" type="text"
+                                           name='username' onChange={this.handleDataChange}
+                                           value={this.props.data.username}/>
                                 </p>
                             </div>
 
                             <div className=" w3-center profile-div-right-side-change_info top-margin-60">
-                                <button className="w3-btn w3-ripple" id="btn-profile-change_info">Send</button>
+                                <button className="w3-btn w3-ripple" id="btn-profile-change_info" type='submit'>Send
+                                </button>
                             </div>
 
                         </form>
                     </div>
                     <div className="profile-tab" id="profile-div-right-side-password">
-                        <form>
+                        <form onSubmit={this.handlePassword}>
                             <div className="profile-div-right-side-change_info">
                                 <label>Old Passsword</label>
                                 <p className="w3-opacity">
-                                    <input className="w3-input w3-opacity w3-text-white input-transparent" type="text"/>
+                                    <input className="w3-input w3-opacity w3-text-white input-transparent"
+                                           type="password"
+                                           name='old_password' onChange={this.handleDataChange}/>
                                 </p>
                             </div>
                             <div className="profile-div-right-side-password">
                                 <label>New Password</label>
                                 <p className="w3-opacity">
                                     <input className="w3-input w3-opacity w3-text-white input-transparent"
-                                           type="email"/>
+                                           type="password" name='new_password' onChange={this.handleDataChange}/>
                                 </p>
                             </div>
 
@@ -98,28 +150,36 @@ class Profile extends Component {
                                 <label>Confirm New Password</label>
                                 <p className="w3-opacity">
                                     <input className="w3-input w3-opacity w3-text-white input-transparent"
-                                           type="email"/>
+                                           type="password" name='new_password2' onChange={this.handleDataChange}/>
                                 </p>
                             </div>
 
                             <div className=" w3-center profile-div-right-side-password top-margin-60">
-                                <button className="w3-btn w3-ripple" id="btn-profile-password">Send</button>
+                                <button className="w3-btn w3-ripple" id="btn-profile-password" type='submit'>Send
+                                </button>
                             </div>
 
                         </form>
                     </div>
                     <div className="profile-tab" id="profile-div-right-side-about_me">
-                        <form>
+                        <form onSubmit={this.handleAboutMe}>
                             <div className="profile-div-right-side-about_me">
                                 <label>About Me</label>
                                 <p className="w3-opacity card-background">
                             <textarea rows="13" cols="20"
                                       className="w3-input w3-opacity w3-text-white input-transparent"
-                                      type="text"></textarea>
+                                      type="text" name='about_me' onChange={this.handleDataChange} value={(() => {
+                                try {
+                                    return this.props.data.profile.about_me
+                                } catch (e) {
+                                    console.log(e)
+                                }
+                            })()}></textarea>
                                 </p>
                             </div>
                             <div className=" w3-center profile-div-right-side-about_me top-margin-60">
-                                <button className="w3-btn w3-ripple" id="btn-profile-about_me">Send</button>
+                                <button className="w3-btn w3-ripple" id="btn-profile-about_me" type='submit'>Send
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -129,4 +189,19 @@ class Profile extends Component {
     }
 }
 
-export default withRouter(Profile)
+const mapStateToProps = state => {
+    return {
+        loading: state.profile.loading,
+        data: state.profile.data,
+        email: state.login.email
+    }
+};
+
+const matchDispatchToProps = dispatch => {
+    return {
+        getData: () => dispatch(fetchProfile()),
+        sendData: (data) => dispatch(sendProfile(data))
+    }
+};
+
+export default connect(mapStateToProps, matchDispatchToProps)(withRouter(Profile))

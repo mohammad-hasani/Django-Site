@@ -1,36 +1,39 @@
 import {
-    PROFILE_REQUEST,
-    PROFILE_FETCH_SUCCESS,
-    PROFILE_SEND_SUCCESS,
-    PROFILE_FAILURE
+    STORY_REQUEST,
+    STORY_TITLES_FETCH_SUCCESS,
+    STORY_FETCH_SUCCESS,
+    STORY_FAILURE
 } from "./types";
 
 const initialState = {
     loading: false,
-    data: '',
+    titles: '',
+    story: '',
     error: ''
 };
 
-export const profileReducer = (state = initialState, action) => {
+export const storyReducer = (state = initialState, action) => {
     switch (action.type) {
-        case PROFILE_REQUEST:
+        case STORY_REQUEST:
             return {
                 ...state,
                 loading: true
             };
-        case PROFILE_FETCH_SUCCESS:
-            return {
-                loading: false,
-                data: action.payload,
-                error: ''
-            };
-        case PROFILE_SEND_SUCCESS:
+        case STORY_TITLES_FETCH_SUCCESS:
             return {
                 ...state,
                 loading: false,
+                titles: action.payload,
                 error: ''
             };
-        case PROFILE_FAILURE:
+        case STORY_FETCH_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                story: action.payload,
+                error: ''
+            };
+        case STORY_FAILURE:
             return {
                 ...state,
                 loading: false,

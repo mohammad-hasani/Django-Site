@@ -277,4 +277,25 @@ body {
   text-align: center;
 }
 
+a:link {
+  color: white;
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+a:active {
+  color: white;
+}
+
+.li-link:hover {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=App.css.map */

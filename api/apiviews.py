@@ -6,6 +6,7 @@ from rest_framework.permissions import AllowAny
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
 
 from . import models
 from . import serializers
@@ -86,24 +87,69 @@ class Profile(APIView):
 
     def get(self, request):
         email = request.GET['email']
-        print({'email': email})
-        profile_data = models.Profile.objects.all().first()
-        print(profile_data)
-        # serialized_data = serializers.ProfileSerializer(profile_data)
-        # data = serialized_data.data
-        # return Response(data)
-        return Response(1)
+        profile_data = User.objects.get(email=email)
+        serialized_data = serializers.UserSerializer(profile_data)
+        data = serialized_data.data
+        return Response(data)
 
     def post(self, request):
-        return Response('ok')
+        email = request.user.email
+
+        username = request.data.get('username', False)
+        old_password = request.data.get('old_password', False)
+        new_password = request.data.get('new_password', False)
+        about_me = request.data.get('about_me', False)
+
+        user = User.objects.get(email=email)
+        if not user:
+            return Response(0)
+
+        if username:
+            user.username = username
+
+        if old_password:
+            if check_password(old_password, user.password):
+                user.set_password(new_password)
+
+        if about_me:
+            user.profile.about_me = about_me
+            user.profile.save()
+
+        user.save()
+
+        return Response(1)
 
 
 class Story(APIView):
-    def get(self, request):
-        stories = models.Story.objects.all()[:10]
-        data = serializers.StorySerializer(stories, many=True)
-        data = data.data
 
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        story_id = request.GET.get('id', False)
+        if story_id:
+            stories = models.Story.objects.get(id=story_id)
+            data = serializers.StorySerializer(stories)
+            data = data.data
+            return Response(data)
+        return Response(0)
+
+
+class StoryTitles(APIView):
+
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        index = 0
+        search = request.GET.get('search', False)
+        all = request.GET.get('all', False)
+        if search:
+            stories = models.Story.objects.filter(title__icontains=search)[index:index + 30]
+            data = serializers.StoryTitleSerializer(stories, many=True)
+            data = data.data
+        if all:
+            stories = models.Story.objects.filter()[index:index + 30]
+            data = serializers.StoryTitleSerializer(stories, many=True)
+            data = data.data
         return Response(data)
 
 # class UserCreate(generics.CreateAPIView):

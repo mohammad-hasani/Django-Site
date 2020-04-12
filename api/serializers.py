@@ -14,7 +14,15 @@ class ContactSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Profile
-        fields = '__all__'
+        fields = ['about_me']
+
+
+class UserSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer()
+
+    class Meta:
+        model = User
+        fields = ['username', 'profile']
 
 
 class StorySerializer(serializers.ModelSerializer):
@@ -22,3 +30,8 @@ class StorySerializer(serializers.ModelSerializer):
         model = models.Story
         fields = '__all__'
 
+
+class StoryTitleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Story
+        fields = ['id', 'title']

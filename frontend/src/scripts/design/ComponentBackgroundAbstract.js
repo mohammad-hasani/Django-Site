@@ -13,7 +13,7 @@ class BackgroundAbstract extends Component {
             fillColor: color,
             strokeColor: color
         };
-        const numberOfPoints = 120;
+        const numberOfPoints = 60;
         const maxDistance = 200;
         var i, j;
 

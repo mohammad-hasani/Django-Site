@@ -12,7 +12,7 @@ class Login extends Component {
         super(props);
         this.state = {
             redirect: false
-    }
+        }
     }
 
     handleSubmit = (e) => {
@@ -30,8 +30,8 @@ class Login extends Component {
     };
 
     render() {
-        if (this.state.redirect){
-            return <Redirect to='/' />
+        if (this.state.redirect) {
+            return <Redirect to='/'/>
         }
         return (
             <div className="w3-card-4 w3-padding-large login-div card-background" id="login">

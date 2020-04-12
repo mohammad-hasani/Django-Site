@@ -1,54 +1,55 @@
 import axios from 'axios'
 import {
-    PROFILE_REQUEST,
-    PROFILE_FETCH_SUCCESS,
-    PROFILE_SEND_SUCCESS,
-    PROFILE_FAILURE
+    STORY_REQUEST,
+    STORY_TITLES_FETCH_SUCCESS,
+    STORY_FETCH_SUCCESS,
+    STORY_FAILURE
 } from "./types";
 
 import {getTokenHeader, getEmail} from "../../scripts/general/helper";
 
 import {SERVER_ADDR} from '../index';
 
-const url = SERVER_ADDR + 'api/profile';
+const url_titles = SERVER_ADDR + 'api/story/titles';
+const url_story = SERVER_ADDR + 'api/story';
+
 
 export const Request = () => {
     return ({
-        type: PROFILE_REQUEST
+        type: STORY_REQUEST
     })
 };
 
-const fetchProfileSuccess = (data) => {
+const fetchStoryTitlesSuccess = (data) => {
     return ({
-        type: PROFILE_FETCH_SUCCESS,
+        type: STORY_TITLES_FETCH_SUCCESS,
         payload: data
     })
 };
 
-const sendProfileSuccess = () => {
+const fetchStorySuccess = (data) => {
     return ({
-        type: PROFILE_SEND_SUCCESS
+        type: STORY_FETCH_SUCCESS,
+        payload: data
     })
 };
 
-
 const Failure = error => {
     return ({
-        type: PROFILE_FAILURE,
+        type: STORY_FAILURE,
         payload: error
     })
 };
 
 
-export const fetchProfile = () => {
+export const fetchTitles = data => {
     return (dispatch) => {
         dispatch(Request);
-        const data = {params: getEmail()};
-        const dataAndHeaders = getTokenHeader(data);
-        axios.get(url, dataAndHeaders)
+        const searchData = {params: data};
+        axios.get(url_titles, searchData)
             .then(response => {
                 const data = response.data;
-                dispatch(fetchProfileSuccess(data))
+                dispatch(fetchStoryTitlesSuccess(data))
             })
             .catch(error => {
                 const errorMsg = error.message;
@@ -58,12 +59,14 @@ export const fetchProfile = () => {
 };
 
 
-export const sendProfile = data => {
+export const fetchStory = data => {
     return (dispatch) => {
         dispatch(Request);
-        axios.post(url, data, getTokenHeader())
+        const searchData = {params: data};
+        axios.get(url_story, searchData)
             .then(response => {
-                dispatch(sendProfileSuccess())
+                const data = response.data;
+                dispatch(fetchStorySuccess(data))
             })
             .catch(error => {
                 const errorMsg = error.message;
@@ -71,4 +74,3 @@ export const sendProfile = data => {
             })
     }
 };
-
