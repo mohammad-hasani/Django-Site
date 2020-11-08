@@ -1,0 +1,5 @@
+@mixin div-center($width, $height) {
+  position: absolute;
+  top: calc(50% - (#{$height}px / 2) - 100px);
+  left: calc(50% - (#{$width}px / 2));
+}
